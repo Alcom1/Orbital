@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     //public fields
     public float rotationalSpeed = 1.0f;
@@ -13,7 +14,8 @@ public class player : MonoBehaviour {
     private float fireRateCounter = 0.0f;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		
 	}
 
@@ -28,13 +30,18 @@ public class player : MonoBehaviour {
             Quaternion.AngleAxis(angle, Vector3.forward), 
             Time.deltaTime * rotationalSpeed);
 
+        CheckFireBullet();
+    }
+
+    private void CheckFireBullet()
+    {
         if (Input.GetMouseButtonDown(0) && fireRateCounter <= 0)
         {
             Instantiate(bullet, this.transform.up * 4, this.transform.rotation);
 
             fireRateCounter = 1 / fireRate;
         }
-        if(fireRateCounter > 0)
+        if (fireRateCounter > 0)
         {
             fireRateCounter -= Time.deltaTime;
         }

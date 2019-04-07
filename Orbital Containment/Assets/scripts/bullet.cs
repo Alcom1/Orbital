@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bullet : MonoBehaviour {
+public class Bullet : MonoBehaviour
+{
 
     public float velocity = 15f;
     public float lifeRadius = 4.45f;
