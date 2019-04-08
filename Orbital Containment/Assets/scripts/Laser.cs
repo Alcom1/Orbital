@@ -42,7 +42,10 @@ public class Laser : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up);
 
-        hit.rigidbody.AddForce(-transform.up * laserForce, ForceMode2D.Force);
+        if(hit.rigidbody != null)
+        {
+            hit.rigidbody.AddForce(-transform.up * laserForce, ForceMode2D.Force);
+        }
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, hit.point);
     }

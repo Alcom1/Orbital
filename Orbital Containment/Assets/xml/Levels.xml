@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LevelCollection>
+    <Levels>
+        <Level>
+            <Objects>
+                <Object name="Rock" xPos="0" yPos="0" scale="1.0"></Object>
+                <Object name="Rock" xPos="2.6" yPos="0.8" scale="0.75"></Object>
+            </Objects>
+        </Level>
+    </Levels>
+</LevelCollection>
