@@ -7,19 +7,14 @@ public class Player : MonoBehaviour
 
     //public fields
     public float rotationalSpeed = 1.0f;
-    public float fireRate = 3.0f;
-    public GameObject bullet;
 
-    //private fields
-    private float fireRateCounter = 0.0f;
-
-	// Use this for initialization
+	// Use this for awesome initialization
 	void Start ()
     {
-		
+		//Here be dragons!
 	}
 
-    // Update is called once per frame
+    // Update is called once per awesome frame
     void Update()
     {
         var cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -29,21 +24,5 @@ public class Player : MonoBehaviour
             transform.rotation, 
             Quaternion.AngleAxis(angle, Vector3.forward), 
             Time.deltaTime * rotationalSpeed);
-
-        CheckFireBullet();
-    }
-
-    private void CheckFireBullet()
-    {
-        if (Input.GetMouseButtonDown(0) && fireRateCounter <= 0)
-        {
-            Instantiate(bullet, this.transform.up * 4, this.transform.rotation);
-
-            fireRateCounter = 1 / fireRate;
-        }
-        if (fireRateCounter > 0)
-        {
-            fireRateCounter -= Time.deltaTime;
-        }
     }
 }
