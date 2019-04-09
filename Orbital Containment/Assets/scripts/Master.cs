@@ -8,22 +8,45 @@ public class Master : MonoBehaviour
 {
     public LevelCollection levelCollection;
 
-	// Use this for initialization
-	void Start ()
+    private string levelPath = "Assets/xml/Levels.xml";
+
+    // Use this for initialization
+    void Start ()
     {
-        var path = "Assets/xml/Levels.xml";
+        levelCollection = GetLevels(levelPath);
 
-        XmlSerializer serializer = new XmlSerializer(typeof(LevelCollection));
+        BuildLevel(0);
+    }
 
-        StreamReader reader = new StreamReader(path);
+    private void BuildLevel(int index)
+    {
+        foreach(LevelObject levelObject in levelCollection.levels[index].objects)
+        {
+            var gameObject = Resources.Load<GameObject>(levelObject.name);
 
-        var levels = serializer.Deserialize(reader) as LevelCollection;
+            gameObject.transform.position = new Vector2(levelObject.xPos, levelObject.yPos);
+            gameObject.transform.localScale = new Vector3(levelObject.scale, levelObject.scale, levelObject.scale);
 
-        reader.Close();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+            gameObject.transform.parent = this.transform;
+
+            Instantiate(gameObject);
+        }
+    }
+
+    //Read Levels
+    private LevelCollection GetLevels(string path)
+    {
+        using (StreamReader reader = new StreamReader(levelPath))
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(LevelCollection));
+            var levelCollectionNew = serializer.Deserialize(reader) as LevelCollection;
+
+            return levelCollectionNew;
+        }
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
 		
 	}
