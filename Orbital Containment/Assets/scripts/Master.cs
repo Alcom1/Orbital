@@ -6,9 +6,9 @@ using System.IO;
 
 public class Master : MonoBehaviour
 {
-    public LevelCollection levelCollection;
+    private LevelCollection levelCollection;
 
-    private string levelPath = "Assets/xml/Levels.xml";
+    private readonly string levelPath = "Assets/xml/Levels.xml";
 
     // Use this for initialization
     void Start ()
@@ -27,9 +27,7 @@ public class Master : MonoBehaviour
             gameObject.transform.position = new Vector2(levelObject.xPos, levelObject.yPos);
             gameObject.transform.localScale = new Vector3(levelObject.scale, levelObject.scale, levelObject.scale);
 
-            gameObject.transform.parent = this.transform;
-
-            Instantiate(gameObject);
+            Instantiate(gameObject, this.transform);
         }
     }
 
