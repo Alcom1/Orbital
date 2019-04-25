@@ -599,6 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationalSpeed: 1
+  breakTime: 0.125
 --- !u!1 &1757343738
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,7 +40,9 @@ public class Laser : MonoBehaviour
 
     private void ResolveFireLaser()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up);
+        var cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, cursorPosition - transform.position);
 
         if(hit.rigidbody != null)
         {
