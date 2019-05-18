@@ -6,15 +6,19 @@ using System.IO;
 
 public class Master : MonoBehaviour
 {
-    private LevelCollection levelCollection;
+    public BarRenderer BarBlue;
+    public BarRenderer BarRed;
 
-    private readonly string levelPath = "Assets/xml/Levels.xml";
+    private float blueProgress = 0;
+    private float blueRate = 10;
+
+    private LevelCollection levelCollection;
+    private readonly string leveblueProgressath = "Assets/xml/Levels.xml";
 
     // Use this for initialization
     void Start ()
     {
-        levelCollection = GetLevels(levelPath);
-
+        levelCollection = GetLevels(leveblueProgressath);
         BuildLevel(0);
     }
 
@@ -34,7 +38,7 @@ public class Master : MonoBehaviour
     //Read Levels
     private LevelCollection GetLevels(string path)
     {
-        using (StreamReader reader = new StreamReader(levelPath))
+        using (StreamReader reader = new StreamReader(leveblueProgressath))
         {
             XmlSerializer serializer = new XmlSerializer(typeof(LevelCollection));
             var levelCollectionNew = serializer.Deserialize(reader) as LevelCollection;
@@ -44,8 +48,12 @@ public class Master : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-		
-	}
+        blueProgress += blueRate * Time.deltaTime;
+
+        BarBlue.UpdateBar(blueProgress);
+
+        BarRed.UpdateBar(blueProgress / 2);
+    }
 }

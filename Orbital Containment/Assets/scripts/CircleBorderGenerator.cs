@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleBorderGenerator : MonoBehaviour {
-
+public class CircleBorderGenerator : MonoBehaviour
+{
     public int pointCount = 50;
     public float radius = 4.2f;
 

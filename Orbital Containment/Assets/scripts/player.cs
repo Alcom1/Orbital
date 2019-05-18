@@ -7,9 +7,7 @@ public class Player : MonoBehaviour
 
     //public fields
     public float rotationalSpeed = 1.0f;
-
     public float breakTime = 1.0f;
-
     private float rotationalSpeedMax = 0.0f;
 
 	// Use this for awesome initialization
@@ -28,8 +26,6 @@ public class Player : MonoBehaviour
     private void Move()
     {
         var cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Debug.Log(cursorPosition);
 
         var angle = Mathf.Atan2(cursorPosition.y, cursorPosition.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Slerp(
