@@ -5,6 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     public float laserForce = 10.0f;
+    public float laserExtension = 0.2f;
     public GameObject ParticleEmitter;
     private ParticleSystem laserParticles;
     private LineRenderer lineRenderer;
@@ -30,6 +31,7 @@ public class Laser : MonoBehaviour
         }
     }
 
+    //Check inputs if a LASER is being fired
     private void CheckFireLaser()
     {
         if (Input.GetMouseButton(0))
@@ -44,20 +46,28 @@ public class Laser : MonoBehaviour
         }
     }
 
+    //Resolve a LASER being fired
     private void ResolveFireLaser()
     {
+        //Cursor position
         var cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        //Cast a ray to see if an object was hit by the laser
         RaycastHit2D hit = Physics2D.Raycast(transform.position, cursorPosition - transform.position);
 
-        if(hit.rigidbody != null)
+        //Push any object with a rigidbody
+        if (hit.rigidbody != null)
         {
-            hit.rigidbody.AddForce(-transform.up * laserForce, ForceMode2D.Force);
+            hit.rigidbody.AddForce(-transform.up * laserForce, ForceMode2D.Force);                              
         }
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, hit.point);
 
-        ParticleEmitter.transform.position = hit.point;
-        ParticleEmitter.transform.LookAt(hit.point + hit.normal, Vector3.back);
+        //Set line renderer positions
+        Vector3 hitPoint = new Vector3(hit.point.x, hit.point.y, transform.position.z);                         //hitpoint has a z-position for proper particle postioning
+        lineRenderer.SetPosition(0, transform.position);                                                        //LASER starts at this's position
+        lineRenderer.SetPosition(1, hitPoint + (hitPoint - transform.position).normalized * laserExtension);    //LASER ends past the hitpoint
+
+        //Set particle emitter transforms
+        ParticleEmitter.transform.position = hitPoint;
+        ParticleEmitter.transform.LookAt(hitPoint + (Vector3)hit.normal, Vector3.back);
     }
 }
