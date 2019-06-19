@@ -27,11 +27,10 @@ public class Master : MonoBehaviour
         foreach(LevelObject levelObject in levelCollection.levels[index].objects)
         {
             var gameObject = Resources.Load<GameObject>(levelObject.name);
+            var newLevelObject = Instantiate(gameObject, this.transform);
 
-            gameObject.transform.position = new Vector2(levelObject.xPos, levelObject.yPos);
-            gameObject.transform.localScale = new Vector3(levelObject.scale, levelObject.scale, levelObject.scale);
-
-            Instantiate(gameObject, this.transform);
+            newLevelObject.transform.position = new Vector3(levelObject.xPos, levelObject.yPos, newLevelObject.transform.position.z);
+            newLevelObject.transform.localScale = new Vector3(levelObject.scale, levelObject.scale, levelObject.scale);
         }
     }
 

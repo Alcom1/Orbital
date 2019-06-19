@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 664971710}
   m_Layer: 0
   m_Name: Orbit
-  m_TagString: Untagged
+  m_TagString: Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointCount: 50
-  radius: 3.84
+  radius: 3.89
 --- !u!1 &688666967
 GameObject:
   m_ObjectHideFlags: 0

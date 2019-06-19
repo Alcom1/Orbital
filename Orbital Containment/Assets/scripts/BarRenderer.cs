@@ -35,7 +35,7 @@ public class BarRenderer : MonoBehaviour
             lineRenderer.SetPosition(counter, GetPointPosition(f)); //Setup point
             counter++;
         }
-        lineRenderer.SetPosition(counter,GetPointPosition(max));    //Last point
+        lineRenderer.SetPosition(counter, GetPointPosition(max));    //Last point
     }
 
     //Get the position of the line for an angle
