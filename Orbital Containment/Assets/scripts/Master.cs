@@ -8,9 +8,13 @@ public class Master : MonoBehaviour
 {
     public BarRenderer BarBlue;
     public BarRenderer BarRed;
+    public List<SpriteRenderer> Borders;
 
     private float blueProgress = 0;
     private float blueRate = 10;
+
+    private float redProgress = 0;
+    private float redRate = 0.1f;
 
     private LevelCollection levelCollection;
     private readonly string leveblueProgressath = "Assets/xml/Levels.xml";
@@ -51,8 +55,26 @@ public class Master : MonoBehaviour
     {
         blueProgress += blueRate * Time.deltaTime;
 
-        BarBlue.UpdateBar(blueProgress);
+        if(blueProgress < 100)
+        {
+            foreach (var rockObject in GameObject.FindGameObjectsWithTag("Rock"))
+            {
+                var rock = rockObject.GetComponent<Rock>();
 
-        BarRed.UpdateBar(blueProgress / 2);
+                if (rock.IsColliding)
+                {
+                    redProgress += redRate * Time.deltaTime;
+                }
+            }
+        }
+
+        BarBlue.UpdateBar(blueProgress);
+        BarRed.UpdateBar(redProgress);
+
+        foreach(var border in Borders)
+        {
+            float channel = 1 - 0.85f * Mathf.Min(redProgress, 1);
+            border.color = new Color(channel, channel, channel);
+        }
     }
 }

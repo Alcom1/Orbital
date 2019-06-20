@@ -5,9 +5,12 @@ using UnityEngine;
 public class Rock : MonoBehaviour {
 
     public GameObject Visual;
+    public bool IsColliding { get { return isColliding; } }
 
-	// Use this for initialization
-	void Start ()
+    private bool isColliding;
+
+    // Use this for initialization
+    void Start ()
     {
 		
 	}
@@ -18,10 +21,13 @@ public class Rock : MonoBehaviour {
 		
 	}
 
+    //While Colliding
     private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.transform.CompareTag("Boundary"))
         {
+            isColliding = true;
+
             Visual.transform.localPosition = new Vector3(
                 Random.value * 0.1f,
                 Random.value * 0.1f,
@@ -29,8 +35,11 @@ public class Rock : MonoBehaviour {
         }
     }
 
+    //On Exit Colliding
     private void OnCollisionExit2D(Collision2D collision)
     {
+        isColliding = false;
+
         Visual.transform.localPosition = Vector3.zero;
     }
 }

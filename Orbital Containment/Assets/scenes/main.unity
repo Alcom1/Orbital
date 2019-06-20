@@ -511,6 +511,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BarBlue: {fileID: 1058320076}
   BarRed: {fileID: 966266734}
+  Borders:
+  - {fileID: 2065085764}
+  - {fileID: 1438401595}
 --- !u!1 &910148574
 GameObject:
   m_ObjectHideFlags: 0
@@ -4167,7 +4170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  valueMax: 100
+  valueMax: 1
   radius: 4.77
 --- !u!1 &1005415537
 GameObject:
