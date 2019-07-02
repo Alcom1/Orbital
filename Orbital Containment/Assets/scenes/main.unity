@@ -840,7 +840,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.15
+      scalar: 0.3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1347,9 +1347,9 @@ ParticleSystem:
           tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: 0
-          inSlope: -2
-          outSlope: -2
+          value: 0.256752
+          inSlope: -1.551165
+          outSlope: -1.551165
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
