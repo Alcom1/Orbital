@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 51720339}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: PlayerCenter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -688,7 +688,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1380716566
+  randomSeed: 1222498551
   InitialModule:
     serializedVersion: 3
     enabled: 1

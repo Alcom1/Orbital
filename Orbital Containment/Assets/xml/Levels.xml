@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LevelCollection>
-    <Levels>
-        <Level>
-            <Objects>
-                <Object name="Rock" xPos="0" yPos="0" scale="1.0"></Object>
-                <Object name="Rock" xPos="2.6" yPos="0.8" scale="0.75"></Object>
-            </Objects>
-        </Level>
-        <Level>
-            <Objects>
-                <Object name="Rock" xPos="2" yPos="2" scale="0.5"></Object>
-                <Object name="Rock" xPos="-2" yPos="2" scale="0.5"></Object>
-                <Object name="Rock" xPos="2" yPos="-2" scale="0.5"></Object>
-                <Object name="Rock" xPos="-2" yPos="-2" scale="0.5"></Object>
-            </Objects>
-        </Level>
-        <Level>
-          <Objects>
-            <Object name="Rock" xPos="2" yPos="2" scale="0.5"></Object>
-            <Object name="Rock" xPos="-2" yPos="2" scale="0.5"></Object>
-            <Object name="Rock" xPos="2" yPos="-2" scale="0.5"></Object>
-            <Object name="Rock" xPos="-2" yPos="-2" scale="0.5"></Object>
-            <Object name="Rock" xPos="0" yPos="2.8" scale="0.5"></Object>
-            <Object name="Rock" xPos="0" yPos="-2.8" scale="0.5"></Object>
-          </Objects>
-        </Level>
-    </Levels>
+  <Levels>
+    <Level>
+      <Objects>
+        <Object name="RockFollow" xPos="0" yPos="0" scale="1.5"></Object>
+      </Objects>
+    </Level>
+    <Level>
+      <Objects>
+        <Object name="Rock" xPos="0" yPos="0" scale="1.0"></Object>
+        <Object name="Rock" xPos="2.6" yPos="0.8" scale="0.75"></Object>
+      </Objects>
+    </Level>
+    <Level>
+      <Objects>
+        <Object name="RockFollow" xPos="0" yPos="0" scale="1.5"></Object>
+        <Object name="Rock" xPos="2" yPos="2" scale="0.5"></Object>
+        <Object name="Rock" xPos="-2" yPos="2" scale="0.5"></Object>
+        <Object name="Rock" xPos="2" yPos="-2" scale="0.5"></Object>
+        <Object name="Rock" xPos="-2" yPos="-2" scale="0.5"></Object>
+      </Objects>
+    </Level>
+    <Level>
+      <Objects>
+        <Object name="Rock" xPos="2" yPos="2" scale="0.5"></Object>
+        <Object name="Rock" xPos="-2" yPos="2" scale="0.5"></Object>
+        <Object name="Rock" xPos="2" yPos="-2" scale="0.5"></Object>
+        <Object name="Rock" xPos="-2" yPos="-2" scale="0.5"></Object>
+        <Object name="Rock" xPos="0" yPos="2.8" scale="0.5"></Object>
+        <Object name="Rock" xPos="0" yPos="-2.8" scale="0.5"></Object>
+      </Objects>
+    </Level>
+  </Levels>
 </LevelCollection>

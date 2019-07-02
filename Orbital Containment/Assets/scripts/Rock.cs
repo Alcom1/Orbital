@@ -7,7 +7,7 @@ public class Rock : MonoBehaviour {
     public GameObject Visual;
     public bool IsColliding { get { return isColliding; } }
 
-    private bool isColliding;
+    protected bool isColliding;
 
     // Use this for initialization
     void Start ()
