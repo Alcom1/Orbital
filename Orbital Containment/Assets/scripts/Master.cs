@@ -69,8 +69,10 @@ public class Master : MonoBehaviour
         switch(gamestate)
         {
             case GameState.Play:
-                UpdateBlue();
-                UpdateRed();
+                if(!UpdateRed())
+                {
+                    UpdateBlue();   //Update blue only if red is not progressing.
+                }
 
                 //Check red status
                 if (redProgress >= BarRed.valueMax)
@@ -120,9 +122,11 @@ public class Master : MonoBehaviour
         BarBlue.UpdateBar(blueProgress); //Update blue bar
     }
 
-    //Update red bar and attributes
-    private void UpdateRed()
+    //Update red bar and attributes, returns true if red is progressing.
+    private bool UpdateRed()
     {
+        bool isColliding = false;
+
         //Update Red progress while blue progress is incomplete, for each rock that is colliding.
         foreach (var rockObject in GameObject.FindGameObjectsWithTag("Rock"))
         {
@@ -130,6 +134,7 @@ public class Master : MonoBehaviour
 
             if (rock.IsColliding)
             {
+                isColliding = true;
                 redProgress += redRate * Time.deltaTime;
             }
         }
@@ -141,5 +146,7 @@ public class Master : MonoBehaviour
             float channel = 1 - 0.85f * Mathf.Min(redProgress, 1);
             border.color = new Color(channel, channel, channel);
         }
+
+        return isColliding;
     }
 }
