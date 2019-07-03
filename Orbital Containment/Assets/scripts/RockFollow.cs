@@ -11,6 +11,8 @@ public class RockFollow : Rock
     // Use this for initialization
     void Start ()
     {
+        this.StartShadow();
+
         playerCenter = GameObject.FindGameObjectWithTag("PlayerCenter");
         rigidBody = this.transform.GetComponent<Rigidbody2D>();
     }
@@ -18,6 +20,8 @@ public class RockFollow : Rock
 	// Update is called once per frame
 	void Update ()
     {
+        this.UpdateShadow();
+
         var faceDirection = playerCenter.transform.position - this.transform.position;
         var faceDirectionNormalized = new Vector2(faceDirection.x, faceDirection.y).normalized;
         var angle = Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg - 90f;
