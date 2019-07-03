@@ -8,6 +8,13 @@
     </Level>
     <Level>
       <Objects>
+        <Object name="RockTravel" xPos="-0.05" yPos="0.05" scale="1.2"></Object>
+        <Object name="Rock" xPos="1.6" yPos="1.6" scale="0.5"></Object>
+        <Object name="Rock" xPos="-1.6" yPos="-1.6" scale="0.5"></Object>
+      </Objects>
+    </Level>
+    <Level>
+      <Objects>
         <Object name="RockTravel" xPos="-1" yPos="-1" scale="0.75"></Object>
         <Object name="RockTravel" xPos="1" yPos="1" scale="0.75"></Object>
       </Objects>
@@ -15,10 +22,23 @@
     <Level>
       <Objects>
         <Object name="RockFollow" xPos="0" yPos="0" scale="1.5"></Object>
-        <Object name="Rock" xPos="2" yPos="2" scale="0.5"></Object>
-        <Object name="Rock" xPos="-2" yPos="2" scale="0.5"></Object>
-        <Object name="Rock" xPos="2" yPos="-2" scale="0.5"></Object>
-        <Object name="Rock" xPos="-2" yPos="-2" scale="0.5"></Object>
+        <Object name="Rock" xPos="1.81" yPos="1.81" scale="0.5"></Object>
+        <Object name="Rock" xPos="-1.81" yPos="1.81" scale="0.5"></Object>
+        <Object name="Rock" xPos="1.81" yPos="-1.81" scale="0.5"></Object>
+        <Object name="Rock" xPos="-1.81" yPos="-1.81" scale="0.5"></Object>
+      </Objects>
+    </Level>
+    <Level>
+      <Objects>
+        <Object name="RockFollow" xPos="2" yPos="2" scale="0.5"></Object>
+        <Object name="RockFollow" xPos="-2" yPos="2" scale="0.5"></Object>
+        <Object name="RockFollow" xPos="2" yPos="-2" scale="0.5"></Object>
+        <Object name="RockFollow" xPos="-2" yPos="-2" scale="0.5"></Object>
+        <Object name="RockTravel" xPos="-0.05" yPos="0.05" scale="0.75"></Object>
+        <Object name="Rock" xPos="0" yPos="2" scale="0.5"></Object>
+        <Object name="Rock" xPos="2" yPos="0" scale="0.5"></Object>
+        <Object name="Rock" xPos="-2" yPos="0" scale="0.5"></Object>
+        <Object name="Rock" xPos="0" yPos="-2" scale="0.5"></Object>
       </Objects>
     </Level>
     <Level>

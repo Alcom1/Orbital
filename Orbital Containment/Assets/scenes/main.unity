@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointCount: 50
-  radius: 3.89
+  radius: 3.84
 --- !u!1 &688666967
 GameObject:
   m_ObjectHideFlags: 0

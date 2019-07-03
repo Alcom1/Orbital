@@ -9,6 +9,9 @@ public class Rock : MonoBehaviour
 
     protected bool isColliding;
 
+    private float shakeAngle = 60;
+    private float shakeIntensity = 0.08f;
+
     // Use this for initialization
     void Start ()
     {
@@ -27,11 +30,13 @@ public class Rock : MonoBehaviour
         if(collision.transform.CompareTag("Boundary"))
         {
             isColliding = true;
+            
+            var shakeDirection = new Vector2(this.transform.position.x, this.transform.position.y).normalized;
+            var shakeDirectionRandom = Quaternion.AngleAxis(Random.Range(-shakeAngle, shakeAngle), Vector3.back) * shakeDirection;
+                shakeDirectionRandom *= Random.value * shakeIntensity;
+                shakeDirectionRandom.z = Visual.transform.localPosition.z;
 
-            Visual.transform.localPosition = new Vector3(
-                Random.value * 0.1f,
-                Random.value * 0.1f,
-                Visual.transform.localPosition.z);
+            Visual.transform.localPosition = shakeDirectionRandom;
         }
     }
 
