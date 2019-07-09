@@ -10,9 +10,9 @@ public class Rock : MonoBehaviour
 
     protected bool isColliding;
 
-    private float shakeAngle = 60;
-    private float shakeIntensity = 0.08f;
-    private float shadowFrequency = 3;
+    private readonly float shakeAngle = 60;
+    private readonly float shakeIntensity = 0.08f;
+    private readonly float shadowFrequency = 3;
     private Vector3 previousPosition;
 
     // Use this for initialization

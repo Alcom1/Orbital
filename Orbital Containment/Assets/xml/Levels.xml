@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LevelCollection>
   <Levels>
+    <Level isMenu="1">
+      <Objects>
+        <Object name="Play" xPos="0" yPos="0" scale="2"></Object>
+      </Objects>
+    </Level>
     <Level>
       <Objects>
         <Object name="RockFollow" xPos="0" yPos="0" scale="1.5"></Object>
@@ -8,9 +13,56 @@
     </Level>
     <Level>
       <Objects>
+        <Object name="RockTravel" xPos="0" yPos="0.05" scale="0.6"></Object>
+        <Object name="RockTravel" xPos="0" yPos="1.5" scale="0.6"></Object>
+      </Objects>
+    </Level>
+    <Level>
+      <Objects>
         <Object name="RockTravel" xPos="-0.05" yPos="0.05" scale="1.2"></Object>
         <Object name="Rock" xPos="1.6" yPos="1.6" scale="0.5"></Object>
         <Object name="Rock" xPos="-1.6" yPos="-1.6" scale="0.5"></Object>
+      </Objects>
+    </Level>
+    <Level>
+      <Objects>
+        <Object name="RockTravel" xPos="0" yPos="1.28" scale="1"></Object>
+        <Object name="RockFollow" xPos="0" yPos="-1.28" scale="1"></Object>
+        <Object name="Rock" xPos="1.4" yPos="0" scale="0.5"></Object>
+        <Object name="Rock" xPos="-1.4" yPos="0" scale="0.5"></Object>
+      </Objects>
+    </Level>
+    <Level>
+      <Objects>
+        <Object name="RockFollow" xPos="1.6" yPos="0" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-1.6" yPos="0" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="0" yPos="1.6" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="0" yPos="-1.6" scale="0.25"></Object>
+        
+        <Object name="RockFollow" xPos="1.13" yPos="1.13" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-1.13" yPos="1.13" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="1.13" yPos="-1.13" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-1.13" yPos="-1.13" scale="0.25"></Object>
+        
+        <Object name="RockFollow" xPos="0.8" yPos="0" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-0.8" yPos="0" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="0" yPos="0.8" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="0" yPos="-0.8" scale="0.25"></Object>
+        
+        <Object name="RockFollow" xPos="2.4" yPos="0" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-2.4" yPos="0" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="0" yPos="2.4" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="0" yPos="-2.4" scale="0.25"></Object>
+        
+        <Object name="RockFollow" xPos="1.2" yPos="2.08" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-1.2" yPos="2.08" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="1.2" yPos="-2.08" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-1.2" yPos="-2.08" scale="0.25"></Object>
+        
+        <Object name="RockFollow" xPos="2.08" yPos="1.2" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-2.08" yPos="1.2" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="2.08" yPos="-1.2" scale="0.25"></Object>
+        <Object name="RockFollow" xPos="-2.08" yPos="-1.2" scale="0.25"></Object>
       </Objects>
     </Level>
     <Level>

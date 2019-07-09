@@ -55,10 +55,14 @@ public class Laser : MonoBehaviour
         //Cast a ray to see if an object was hit by the laser
         RaycastHit2D hit = Physics2D.Raycast(transform.position, cursorPosition - transform.position);
 
-        //Push any object with a rigidbody
+        //Push any object with a rigidbody or trigger other functionality based on tags
         if (hit.rigidbody != null)
         {
             hit.rigidbody.AddForce(-transform.up * laserForce, ForceMode2D.Force);                              
+        }
+        if(hit.transform.tag == "Play")
+        {
+            hit.transform.GetComponent<Play>().ApplyForce();
         }
 
         //Set line renderer positions

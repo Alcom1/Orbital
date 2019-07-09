@@ -13,6 +13,9 @@ public class LevelCollection
 
 public class Level
 {
+    [XmlAttribute("isMenu")]
+    public bool isMenu;
+
     [XmlArray("Objects")]
     [XmlArrayItem("Object")]
     public LevelObject[] objects;

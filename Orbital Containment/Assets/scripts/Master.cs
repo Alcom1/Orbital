@@ -6,6 +6,7 @@ using System.IO;
 
 public enum GameState
 {
+    Menu,
     Play,
     Win,
     Lose
@@ -18,14 +19,14 @@ public class Master : MonoBehaviour
     public GameObject RockParent;
     public List<SpriteRenderer> Borders;
 
-    private GameState gamestate = GameState.Play;
+    private GameState gameState = GameState.Play;
     private int currentLevel = 0;
 
     private float blueProgress = 0;
-    private float blueRate = 10;
+    private readonly float blueRate = 10;
 
     private float redProgress = 0;
-    private float redRate = 0.25f;
+    private readonly float redRate = 0.25f;
 
     private LevelCollection levelCollection;
     private readonly string leveblueProgressath = "Assets/xml/Levels.xml";
@@ -37,17 +38,28 @@ public class Master : MonoBehaviour
         BuildLevel(currentLevel);
     }
 
-    //Construct the level of a specific index
+    //Build the level of a specific index
     private void BuildLevel(int index)
     {
+        //Instantiate each object in the level and set attributes
         currentLevel = index;
-        foreach (LevelObject levelObject in levelCollection.levels[index].objects)
+        foreach (LevelObject levelObject in levelCollection.levels[index].objects)   
         {
             var gameObject = Resources.Load<GameObject>(levelObject.name);
             var newLevelObject = Instantiate(gameObject, RockParent.transform);
 
             newLevelObject.transform.position = new Vector3(levelObject.xPos, levelObject.yPos, newLevelObject.transform.position.z);
             newLevelObject.transform.localScale = new Vector3(levelObject.scale, levelObject.scale, levelObject.scale);
+        }
+
+        //Set to play or menu based on level type
+        if (levelCollection.levels[index].isMenu)
+        {
+            gameState = GameState.Menu;
+        }
+        else
+        {
+            gameState = GameState.Play;
         }
     }
 
@@ -66,8 +78,15 @@ public class Master : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(gamestate)
+        switch(gameState)
         {
+            case GameState.Menu:
+                //Check if game should enter play state (play button is pressed)
+                if(this.CheckPlay())
+                {
+                    gameState = GameState.Win;
+                }
+            break;
             case GameState.Play:
                 if(!UpdateRed())
                 {
@@ -77,24 +96,22 @@ public class Master : MonoBehaviour
                 //Check red status
                 if (redProgress >= BarRed.valueMax)
                 {
-                    gamestate = GameState.Lose; //Lose
+                    gameState = GameState.Lose; //Lose
                 }
 
                 //Check Blue status
                 if (blueProgress >= BarBlue.valueMax)
                 {
-                    gamestate = GameState.Win;  //Win
+                    gameState = GameState.Win;  //Win
                 }
             break;
             case GameState.Win:
                 ClearLevel();
                 BuildLevel((++currentLevel) % levelCollection.levels.Length);
-                gamestate = GameState.Play;
             break;
             case GameState.Lose:
                 ClearLevel();
                 BuildLevel(currentLevel);
-                gamestate = GameState.Play;
             break;
         }
     }
@@ -104,13 +121,30 @@ public class Master : MonoBehaviour
     {
         //Reset progress
         blueProgress = 0;
+        BarBlue.UpdateBar(blueProgress);
         redProgress = 0;
+        BarRed.UpdateBar(redProgress);
 
         //Delete all rocks
         foreach (Transform child in RockParent.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
+    }
+
+    //Check if game should enter play state, returns true if so.
+    private bool CheckPlay()
+    {
+        //Return true if a play button is pressed
+        foreach (var playObject in GameObject.FindGameObjectsWithTag("Play"))
+        {
+            if(playObject.GetComponent<Play>().IsPressed)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //Update blue bar
