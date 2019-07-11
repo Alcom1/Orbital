@@ -6,10 +6,10 @@ public class RockFollow : Rock
 {
     private GameObject playerCenter;
     private Rigidbody2D rigidBody;
-    private float force = 1.0f;
+    private readonly float force = 8.0f;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         this.ResetShadow();
 
@@ -18,7 +18,7 @@ public class RockFollow : Rock
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate()
     {
         UpdateRock();
     }

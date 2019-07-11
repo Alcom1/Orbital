@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public float laserForce = 10.0f;
-    public float laserExtension = 0.2f;
     public GameObject ParticleEmitter;
     private ParticleSystem laserParticles;
     private LineRenderer lineRenderer;
+    private readonly float laserForce = 30.0f;
+    private readonly float laserExtension = 0.2f;
 
-	// Use this for LASER initialization
-	void Start ()
+    // Use this for LASER initialization
+    void Start ()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.useWorldSpace = true;
@@ -21,7 +21,7 @@ public class Laser : MonoBehaviour
     }
 
     // Update is called once per LASER frame
-    void Update ()
+    void FixedUpdate ()
     {
         CheckFireLaser();
 

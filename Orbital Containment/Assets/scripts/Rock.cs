@@ -25,13 +25,13 @@ public class Rock : MonoBehaviour
     private Vector3 previousPosition;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         this.ResetShadow();
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate()
     {
         UpdateRock();
     }
