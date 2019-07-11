@@ -29,7 +29,7 @@ public class Master : MonoBehaviour
     private readonly float redRate = 0.25f;
 
     private LevelCollection levelCollection;
-    private readonly string leveblueProgressath = "Assets/xml/Levels.xml";
+    private readonly string leveblueProgressath = "Levels";
 
     // Use this for initialization
     void Start ()
@@ -66,7 +66,8 @@ public class Master : MonoBehaviour
     //Read Levels
     private LevelCollection GetLevels(string path)
     {
-        using (StreamReader reader = new StreamReader(leveblueProgressath))
+        var xmlTextFile = Resources.Load<TextAsset>(path);
+        using (StringReader reader = new StringReader(xmlTextFile.text))
         {
             XmlSerializer serializer = new XmlSerializer(typeof(LevelCollection));
             var levelCollectionNew = serializer.Deserialize(reader) as LevelCollection;
@@ -123,7 +124,7 @@ public class Master : MonoBehaviour
         BarBlue.UpdateBar(blueProgress);
         redProgress = 0;
         BarRed.UpdateBar(redProgress);
-        updateBorders(redProgress);
+        UpdateBorders(redProgress);
 
         //Delete all rocks
         foreach (Transform child in RockParent.transform)
@@ -175,13 +176,13 @@ public class Master : MonoBehaviour
 
         BarRed.UpdateBar(redProgress);      //Update red bar
 
-        updateBorders(redProgress);    //Update borders
+        UpdateBorders(redProgress);    //Update borders
 
         return isColliding;
     }
 
     //Update the border color for a new value
-    private void updateBorders(float borderValue)
+    private void UpdateBorders(float borderValue)
     {
         foreach (var border in Borders) //Update border colors
         {
