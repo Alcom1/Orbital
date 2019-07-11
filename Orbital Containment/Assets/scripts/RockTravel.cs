@@ -10,13 +10,19 @@ public class RockTravel : Rock
     // Use this for initialization
     void Start ()
     {
-        this.StartShadow();
+        this.ResetShadow();
 
         rigidBody = this.transform.GetComponent<Rigidbody2D>();
     }
 	
 	// Update is called once per frame
 	void Update ()
+    {
+        UpdateRock();
+    }
+
+    //Update for the alive state
+    protected override void UpdateAlive()
     {
         this.UpdateShadow();
 

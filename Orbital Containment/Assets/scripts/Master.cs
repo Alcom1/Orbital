@@ -82,11 +82,12 @@ public class Master : MonoBehaviour
         {
             case GameState.Menu:
                 //Check if game should enter play state (play button is pressed)
-                if(this.CheckPlay())
+                if(CheckPlay())
                 {
-                    gameState = GameState.Win;
+                    ClearLevel();
+                    BuildLevel((++currentLevel) % levelCollection.levels.Length);
                 }
-            break;
+                break;
             case GameState.Play:
                 if(!UpdateRed())
                 {
@@ -96,22 +97,20 @@ public class Master : MonoBehaviour
                 //Check red status
                 if (redProgress >= BarRed.valueMax)
                 {
-                    gameState = GameState.Lose; //Lose
+                    StartLose();
                 }
 
                 //Check Blue status
                 if (blueProgress >= BarBlue.valueMax)
                 {
-                    gameState = GameState.Win;  //Win
+                    StartWin();
                 }
             break;
             case GameState.Win:
-                ClearLevel();
-                BuildLevel((++currentLevel) % levelCollection.levels.Length);
+                UpdateWin();
             break;
             case GameState.Lose:
-                ClearLevel();
-                BuildLevel(currentLevel);
+                UpdateLose();
             break;
         }
     }
@@ -124,6 +123,7 @@ public class Master : MonoBehaviour
         BarBlue.UpdateBar(blueProgress);
         redProgress = 0;
         BarRed.UpdateBar(redProgress);
+        updateBorders(redProgress);
 
         //Delete all rocks
         foreach (Transform child in RockParent.transform)
@@ -173,14 +173,67 @@ public class Master : MonoBehaviour
             }
         }
 
-        BarRed.UpdateBar(redProgress);  //Update red bar
+        BarRed.UpdateBar(redProgress);      //Update red bar
 
-        foreach (var border in Borders) //Update border colors
-        {
-            float channel = 1 - 0.85f * Mathf.Min(redProgress, 1);
-            border.color = new Color(channel, channel, channel);
-        }
+        updateBorders(redProgress);    //Update borders
 
         return isColliding;
+    }
+
+    //Update the border color for a new value
+    private void updateBorders(float borderValue)
+    {
+        foreach (var border in Borders) //Update border colors
+        {
+            float channel = 1 - 0.85f * Mathf.Min(borderValue, 1);
+            border.color = new Color(channel, channel, channel);
+        }
+    }
+
+    //Set the game in a losing state
+    private void StartLose()
+    {
+        gameState = GameState.Lose;
+    }
+
+    //Update for a losing state
+    private void UpdateLose()
+    {
+        ClearLevel();
+        BuildLevel(currentLevel);
+    }
+
+    //Set the game in a winning state
+    private void StartWin()
+    {
+        //Kill all rocks upon winning
+        foreach (var rockObject in GameObject.FindGameObjectsWithTag("Rock"))
+        {
+            rockObject.GetComponent<Rock>().Kill();
+        }
+
+        gameState = GameState.Win;
+    }
+
+    //Update for a winning state
+    private void UpdateWin()
+    {
+        //Check if all rocks are dead
+        var allDead = true;
+
+        foreach (var rockObject in GameObject.FindGameObjectsWithTag("Rock"))
+        {
+            if(!rockObject.GetComponent<Rock>().IsDead)
+            {
+                allDead = false;
+            }
+        }
+
+        //If all rocks are dead, build the next level
+        if (allDead)
+        {
+            ClearLevel();
+            BuildLevel((++currentLevel) % levelCollection.levels.Length);
+        }
     }
 }

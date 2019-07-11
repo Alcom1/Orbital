@@ -11,7 +11,7 @@ public class RockFollow : Rock
     // Use this for initialization
     void Start ()
     {
-        this.StartShadow();
+        this.ResetShadow();
 
         playerCenter = GameObject.FindGameObjectWithTag("PlayerCenter");
         rigidBody = this.transform.GetComponent<Rigidbody2D>();
@@ -19,6 +19,12 @@ public class RockFollow : Rock
 	
 	// Update is called once per frame
 	void Update ()
+    {
+        UpdateRock();
+    }
+
+    //Update for the alive state
+    protected override void UpdateAlive()
     {
         this.UpdateShadow();
 
