@@ -372,9 +372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb317048441ff5d43b1cb3e0c9f27950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserForce: 5
-  laserExtension: 0.2
   ParticleEmitter: {fileID: 910148574}
+  IsActive: 0
 --- !u!1 &545427695
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +540,7 @@ MonoBehaviour:
   BarBlue: {fileID: 1058320076}
   BarRed: {fileID: 966266734}
   RockParent: {fileID: 125833783}
+  Laser: {fileID: 161534732}
   Borders:
   - {fileID: 2065085764}
   - {fileID: 1438401595}

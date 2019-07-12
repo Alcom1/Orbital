@@ -8,6 +8,7 @@ public enum GameState
 {
     Menu,
     Play,
+    Grow,
     Win,
     Lose
 }
@@ -17,6 +18,7 @@ public class Master : MonoBehaviour
     public BarRenderer BarBlue;
     public BarRenderer BarRed;
     public GameObject RockParent;
+    public GameObject Laser;
     public List<SpriteRenderer> Borders;
 
     private GameState gameState = GameState.Play;
@@ -55,11 +57,12 @@ public class Master : MonoBehaviour
         //Set to play or menu based on level type
         if (levelCollection.levels[index].isMenu)
         {
+            LaserActivate();
             gameState = GameState.Menu;
         }
         else
         {
-            gameState = GameState.Play;
+            gameState = GameState.Grow;
         }
     }
 
@@ -83,11 +86,7 @@ public class Master : MonoBehaviour
         {
             case GameState.Menu:
                 //Check if game should enter play state (play button is pressed)
-                if(CheckPlay())
-                {
-                    ClearLevel();
-                    BuildLevel((++currentLevel) % levelCollection.levels.Length);
-                }
+                UpdateMenu();
                 break;
             case GameState.Play:
                 if(!UpdateRed())
@@ -106,6 +105,9 @@ public class Master : MonoBehaviour
                 {
                     StartWin();
                 }
+            break;
+            case GameState.Grow:
+                UpdateGrow();
             break;
             case GameState.Win:
                 UpdateWin();
@@ -134,18 +136,18 @@ public class Master : MonoBehaviour
     }
 
     //Check if game should enter play state, returns true if so.
-    private bool CheckPlay()
+    private void UpdateMenu()
     {
         //Return true if a play button is pressed
         foreach (var playObject in GameObject.FindGameObjectsWithTag("Play"))
         {
             if(playObject.GetComponent<Play>().IsPressed)
             {
-                return true;
+                LaserDeactivate();
+                ClearLevel();
+                BuildLevel((++currentLevel) % levelCollection.levels.Length);
             }
         }
-
-        return false;
     }
 
     //Update blue bar
@@ -191,9 +193,33 @@ public class Master : MonoBehaviour
         }
     }
 
+    //Update for a growing state
+    private void UpdateGrow()
+    {
+        //Check if all rocks are fully grown
+        var allGrown = true;
+
+        foreach (var rockObject in GameObject.FindGameObjectsWithTag("Rock"))
+        {
+            if (!rockObject.GetComponent<Rock>().IsGrown)
+            {
+                allGrown = false;
+            }
+        }
+
+        //If all rocks are grown, switch to a playing state
+        if (allGrown)
+        {
+            LaserActivate();
+            gameState = GameState.Play;
+        }
+    }
+
     //Set the game in a losing state
     private void StartLose()
     {
+        LaserDeactivate();
+
         gameState = GameState.Lose;
     }
 
@@ -207,6 +233,8 @@ public class Master : MonoBehaviour
     //Set the game in a winning state
     private void StartWin()
     {
+        LaserDeactivate();
+
         //Kill all rocks upon winning
         foreach (var rockObject in GameObject.FindGameObjectsWithTag("Rock"))
         {
@@ -236,5 +264,17 @@ public class Master : MonoBehaviour
             ClearLevel();
             BuildLevel((++currentLevel) % levelCollection.levels.Length);
         }
+    }
+
+    //Activate the player laser
+    private void LaserActivate()
+    {
+        Laser.GetComponent<Laser>().IsActive = true;
+    }
+
+    //Deactivate the player laser
+    private void LaserDeactivate()
+    {
+        Laser.GetComponent<Laser>().IsActive = false;
     }
 }

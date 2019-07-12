@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
+
     public GameObject ParticleEmitter;
+    public bool IsActive = false;
+
     private ParticleSystem laserParticles;
     private LineRenderer lineRenderer;
     private readonly float laserForce = 2000.0f;
@@ -34,7 +37,7 @@ public class Laser : MonoBehaviour
     //Check inputs if a LASER is being fired
     private void CheckFireLaser()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && IsActive)
         {
             lineRenderer.enabled = true;
             if (laserParticles.isStopped) { laserParticles.Play(); }

@@ -6,6 +6,8 @@ public class Rock : MonoBehaviour
 {
     private enum RockState
     {
+        Start,
+        Grow,
         Alive,
         Dying,
         Dead
@@ -14,20 +16,23 @@ public class Rock : MonoBehaviour
     public GameObject Visual;
     public SpriteRenderer Shadow;
     public bool IsDead { get { return this.rockState == RockState.Dead; } }
+    public bool IsGrown { get { return this.transform.localScale.x == this.maxScale; } }
     public bool IsColliding { get { return isColliding; } }
     protected bool isColliding;
 
-    private RockState rockState = RockState.Alive;
+    private RockState rockState = RockState.Start;
     private readonly float shakeAngle = 60;
     private readonly float shakeIntensity = 0.08f;
     private readonly float shadowFrequency = 3;
-    private readonly float shrinkRate = 4.0f;
+    private readonly float shrinkRate = 2.0f;
+    private readonly float growthRate = 1.0f;
+    private float maxScale = 1.0f;
     private Vector3 previousPosition;
 
     // Use this for initialization
     void Start()
     {
-        this.ResetShadow();
+        UpdateStarting();
     }
 	
 	// Update is called once per frame
@@ -41,6 +46,9 @@ public class Rock : MonoBehaviour
     {
         switch (rockState)
         {
+            case RockState.Grow:
+                UpdateGrowing();
+                break;
             case RockState.Alive:
                 UpdateAlive();
                 break;
@@ -50,6 +58,31 @@ public class Rock : MonoBehaviour
             case RockState.Dead:
                 UpdateDead();
                 break;
+        }
+    }
+
+    //Update for the starting state
+    protected virtual void UpdateStarting()
+    {
+        this.ResetShadow();
+        this.maxScale = this.transform.localScale.x;
+        this.transform.localScale = Vector3.zero;
+        this.rockState = RockState.Grow;
+    }
+
+    //Update for the growing state
+    protected virtual void UpdateGrowing()
+    {
+        float currentScale = this.transform.localScale.x;
+        if (currentScale < maxScale)
+        {
+            currentScale += maxScale * growthRate * Time.deltaTime;
+            if(currentScale > maxScale)
+            {
+                currentScale = maxScale;
+                this.rockState = RockState.Alive;
+            }
+            this.transform.localScale = new Vector3(currentScale, currentScale, currentScale);
         }
     }
 

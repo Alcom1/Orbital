@@ -9,7 +9,7 @@ public class BarRenderer : MonoBehaviour
     public float radius = 4.8f;
 
     private LineRenderer lineRenderer;
-    private float stepLength = Mathf.PI / 120;  //Angular distance each step in the bar.
+    private readonly float stepLength = Mathf.PI / 120;  //Angular distance each step in the bar.
 
     // Use this for initialization
     void Start ()
