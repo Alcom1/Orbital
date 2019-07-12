@@ -31,7 +31,7 @@ public class Rock : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void FixedUpdate()
+	void Update()
     {
         UpdateRock();
     }
@@ -62,7 +62,7 @@ public class Rock : MonoBehaviour
     //Update for the dying state
     protected virtual void UpdateDying()
     {
-        var newScale = this.transform.localScale.x - this.shrinkRate * Time.fixedDeltaTime;
+        var newScale = this.transform.localScale.x - this.shrinkRate * Time.deltaTime;
         if(newScale > 0)
         {
             this.transform.localScale = new Vector3(newScale, newScale, newScale);
@@ -99,7 +99,7 @@ public class Rock : MonoBehaviour
     protected void UpdateShadow()
     {
         //Gradually decrease shadow opacity
-        Shadow.color = new Color(1, 1, 1, Shadow.color.a - shadowFrequency * Time.fixedDeltaTime);
+        Shadow.color = new Color(1, 1, 1, Shadow.color.a - shadowFrequency * Time.deltaTime);
 
         //reset shadow once opacity reaches 0.
         if (Shadow.color.a <= 0)

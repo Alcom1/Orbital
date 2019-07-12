@@ -5,7 +5,7 @@ using UnityEngine;
 public class RockTravel : Rock
 {
     private Rigidbody2D rigidBody;
-    private readonly float force = 8.0f;
+    private readonly float force = 200.0f;
 
     // Use this for initialization
     void Start()
@@ -16,7 +16,7 @@ public class RockTravel : Rock
     }
 	
 	// Update is called once per frame
-	void FixedUpdate()
+	void Update()
     {
         UpdateRock();
     }
@@ -31,6 +31,6 @@ public class RockTravel : Rock
         var angle = Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg - 90f;
         this.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        this.rigidBody.AddForce(faceDirectionNormalized * this.force);
+        this.rigidBody.AddForce(faceDirectionNormalized * this.force * Time.deltaTime);
     }
 }

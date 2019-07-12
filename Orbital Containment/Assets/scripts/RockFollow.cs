@@ -6,7 +6,7 @@ public class RockFollow : Rock
 {
     private GameObject playerCenter;
     private Rigidbody2D rigidBody;
-    private readonly float force = 8.0f;
+    private readonly float force = 200.0f;
 
     // Use this for initialization
     void Start()
@@ -18,7 +18,7 @@ public class RockFollow : Rock
     }
 	
 	// Update is called once per frame
-	void FixedUpdate()
+	void Update()
     {
         UpdateRock();
     }
@@ -32,8 +32,7 @@ public class RockFollow : Rock
         var faceDirectionNormalized = new Vector2(faceDirection.x, faceDirection.y).normalized;
         var angle = Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg - 90f;
         this.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        this.rigidBody.AddForce(faceDirectionNormalized * this.force);
+        this.rigidBody.AddForce(faceDirectionNormalized * this.force * Time.deltaTime);
         this.rigidBody.velocity = faceDirectionNormalized * Vector2.Dot(this.rigidBody.velocity, faceDirectionNormalized);
     }
 }

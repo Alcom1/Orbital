@@ -7,7 +7,7 @@ public class Laser : MonoBehaviour
     public GameObject ParticleEmitter;
     private ParticleSystem laserParticles;
     private LineRenderer lineRenderer;
-    private readonly float laserForce = 30.0f;
+    private readonly float laserForce = 2000.0f;
     private readonly float laserExtension = 0.2f;
 
     // Use this for LASER initialization
@@ -21,7 +21,7 @@ public class Laser : MonoBehaviour
     }
 
     // Update is called once per LASER frame
-    void FixedUpdate ()
+    void Update ()
     {
         CheckFireLaser();
 
@@ -58,7 +58,7 @@ public class Laser : MonoBehaviour
         //Push any object with a rigidbody or trigger other functionality based on tags
         if (hit.rigidbody != null)
         {
-            hit.rigidbody.AddForce(-transform.up * laserForce, ForceMode2D.Force);                              
+            hit.rigidbody.AddForce(-transform.up * laserForce * Time.deltaTime, ForceMode2D.Force);                              
         }
         if(hit.transform.tag == "Play")
         {
