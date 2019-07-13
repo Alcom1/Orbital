@@ -112,6 +112,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
+647e2af604e02ff32ea710a46f6d0c39 Assembly-CSharp.dll:.RockGrow
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -155,4 +156,3 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 647e2af604e02ff32ea710a46f6d0c39 Assembly-CSharp.dll:.Rock
 647e2af604e02ff32ea710a46f6d0c39 Assembly-CSharp.dll:.RockTravel
 07b3126f4ec3377822635c56c35da084 Assembly-CSharp.dll:.Master
-647e2af604e02ff32ea710a46f6d0c39 Assembly-CSharp.dll:.RockGrow
