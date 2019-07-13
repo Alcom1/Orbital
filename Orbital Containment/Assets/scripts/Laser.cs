@@ -11,6 +11,7 @@ public class Laser : MonoBehaviour
     private ParticleSystem laserParticles;
     private LineRenderer lineRenderer;
     private readonly float laserForce = 2000.0f;
+    private readonly float laserShrinkRate = 1.0f;
     private readonly float laserExtension = 0.2f;
 
     // Use this for LASER initialization
@@ -61,11 +62,21 @@ public class Laser : MonoBehaviour
         //Push any object with a rigidbody or trigger other functionality based on tags
         if (hit.rigidbody != null)
         {
-            hit.rigidbody.AddForce(-transform.up * laserForce * Time.deltaTime, ForceMode2D.Force);                              
+            hit.rigidbody.AddForceAtPosition(-transform.up * laserForce * Time.deltaTime, hit.point, ForceMode2D.Force);
         }
+        //Hitting a play object
         if(hit.transform.tag == "Play")
         {
             hit.transform.GetComponent<Play>().ApplyForce();
+        }
+        //Hitting a special rock object
+        if (hit.transform.tag == "Rock")
+        {
+            var rockGrow = hit.transform.GetComponent<RockGrow>();
+            if(rockGrow)
+            {
+                rockGrow.AddToScale(-this.laserShrinkRate * Time.deltaTime);
+            }
         }
 
         //Set line renderer positions
