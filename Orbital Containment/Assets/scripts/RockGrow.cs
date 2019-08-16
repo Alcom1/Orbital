@@ -5,6 +5,7 @@ using UnityEngine;
 public class RockGrow : Rock
 {
     private readonly float growthRateAlive = 0.15f;
+    private readonly float minScale = 0.2f;
 
     // Use this for initialization
     void Start()
@@ -29,7 +30,7 @@ public class RockGrow : Rock
     //Add to the size of this rock
     public void AddToScale(float value)
     {
-        var newScale = this.transform.localScale.x + value;
+        var newScale = Mathf.Max(this.transform.localScale.x + value, 0.2f);
         this.transform.localScale = new Vector3(newScale, newScale, newScale);
     }
 }

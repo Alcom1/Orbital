@@ -81,8 +81,9 @@ public class Laser : MonoBehaviour
 
         //Set line renderer positions
         Vector3 hitPoint = new Vector3(hit.point.x, hit.point.y, transform.position.z);                         //hitpoint has a z-position for proper particle postioning
-        lineRenderer.SetPosition(0, transform.position);                                                        //LASER starts at this's position
-        lineRenderer.SetPosition(1, hitPoint + (hitPoint - transform.position).normalized * laserExtension);    //LASER ends past the hitpoint
+        Vector3 laserExtensionVector = (hitPoint - transform.position).normalized * laserExtension;
+        lineRenderer.SetPosition(0, transform.position - laserExtensionVector); //LASER starts at this's position
+        lineRenderer.SetPosition(1, hitPoint + laserExtensionVector);    //LASER ends past the hitpoint
 
         //Set particle emitter transforms
         ParticleEmitter.transform.position = hitPoint;
