@@ -11,7 +11,7 @@ public class LevelCollection
     public Level[] levels;
 }
 
-public class Level
+public struct Level
 {
     [XmlAttribute("isMenu")]
     public bool isMenu;

@@ -30,7 +30,7 @@ public class RockGrow : Rock
     //Add to the size of this rock
     public void AddToScale(float value)
     {
-        var newScale = Mathf.Max(this.transform.localScale.x + value, 0.2f);
+        var newScale = Mathf.Max(this.transform.localScale.x + value, minScale);
         this.transform.localScale = new Vector3(newScale, newScale, newScale);
     }
 }
