@@ -6,6 +6,7 @@ public class Laser : MonoBehaviour
 {
 
     public GameObject ParticleEmitter;
+    public GameObject LaserBase;
     public bool IsActive = false;
 
     private ParticleSystem laserParticles;
@@ -20,6 +21,8 @@ public class Laser : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.useWorldSpace = true;
         lineRenderer.enabled = false;
+
+        LaserBase.SetActive(false);
 
         laserParticles = ParticleEmitter.GetComponent<ParticleSystem>();
     }
@@ -41,11 +44,13 @@ public class Laser : MonoBehaviour
         if (Input.GetMouseButton(0) && IsActive)
         {
             lineRenderer.enabled = true;
+            LaserBase.SetActive(true);
             if (laserParticles.isStopped) { laserParticles.Play(); }
         }
         else
         {
             lineRenderer.enabled = false;
+            LaserBase.SetActive(false);
             if (laserParticles.isPlaying) { laserParticles.Stop(); }
         }
     }
@@ -55,6 +60,8 @@ public class Laser : MonoBehaviour
     {
         //Cursor position
         var cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        SetLaserBaseFaceDirection(cursorPosition);
 
         //Cast a ray to see if an object was hit by the laser
         RaycastHit2D hit = Physics2D.Raycast(transform.position, cursorPosition - transform.position);
@@ -80,13 +87,21 @@ public class Laser : MonoBehaviour
         }
 
         //Set line renderer positions
-        Vector3 hitPoint = new Vector3(hit.point.x, hit.point.y, transform.position.z);                         //hitpoint has a z-position for proper particle postioning
+        Vector3 hitPoint = new Vector3(hit.point.x, hit.point.y, transform.position.z);                 //hitpoint has a z-position for proper particle postioning
         Vector3 laserExtensionVector = (hitPoint - transform.position).normalized * laserExtension;
-        lineRenderer.SetPosition(0, transform.position - laserExtensionVector); //LASER starts at this's position
-        lineRenderer.SetPosition(1, hitPoint + laserExtensionVector);    //LASER ends past the hitpoint
+        lineRenderer.SetPosition(0, transform.position);                //LASER starts at this's position
+        lineRenderer.SetPosition(1, hitPoint + laserExtensionVector);   //LASER ends past the hitpoint
 
         //Set particle emitter transforms
         ParticleEmitter.transform.position = hitPoint;
         ParticleEmitter.transform.LookAt(hitPoint + (Vector3)hit.normal, Vector3.back);
+    }
+
+    //Sets the laser base to face a direction.
+    private void SetLaserBaseFaceDirection(Vector3 facePosition)
+    {
+        var faceDirection = facePosition - this.transform.position;
+        var angle = Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg + 90f;
+        LaserBase.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
